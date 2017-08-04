@@ -1,6 +1,5 @@
 var React = require('react');
 import ListItem from './List-item';
-import '../style/listItem.css';
 import { connect } from 'react-redux';
 
 class List extends React.Component {
@@ -14,10 +13,8 @@ class List extends React.Component {
   }
   render(){
     return (
-      <div className="row">
-        <div className="col-xs-12">
-          { this.getListItems() }
-        </div>
+      <div className="wrapItems">
+        { this.getListItems() }
       </div>
     );
   }

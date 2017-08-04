@@ -1,6 +1,8 @@
 var React = require('react');
 import {connect} from 'react-redux';
 import {SearchAction} from '../actions/actions';
+import '../style/searchBar.scss';
+import '../style/list.scss';
 
 class SearchBar extends React.Component{
 
@@ -18,12 +20,8 @@ class SearchBar extends React.Component{
   }
   render(){
     return (
-      <div className="row" style={{'marginTop': '20px'}}>
-        <div className="col-xs-12">
-          <input className="form-control" onKeyPress={ (e) =>
-            e.charCode == 13 && this.handleInput(e, {query: e.target.value})}/>
-        </div>
-      </div>
+        <div className="parentSearch"><input className="form-control searchBar" onKeyPress={ (e) =>
+          e.charCode == 13 && this.handleInput(e, {query: e.target.value})}/></div>
     )
   }
 

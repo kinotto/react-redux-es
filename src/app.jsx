@@ -1,5 +1,4 @@
 var React = require('react');
-import APIService from './components/API.service';
 import SearchBar from './components/searchBar';
 import List from './components/List';
 
@@ -27,6 +26,10 @@ export default class App extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             <SearchBar search={this.get.bind(this)} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
             <List />
           </div>
         </div>

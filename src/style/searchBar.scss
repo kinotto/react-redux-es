@@ -1,0 +1,17 @@
+.searchBar{
+  padding: 20px !important;
+  border-radius: 22px !important;
+
+}
+
+/*.parentSearch:before{
+  content: url("https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-128.png");
+  width: 32px;
+  height: 32px;
+}*/
+
+input.searchBar {
+  background: url("https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-128.png")  no-repeat scroll 7px 7px;;
+  background-size: 26px 26px;
+  padding-left: 50px !important;
+}
