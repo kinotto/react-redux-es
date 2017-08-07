@@ -7,23 +7,38 @@ import rootReducer from './reducers/index';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Detail from './components/Detail.jsx';
 
 let store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
 
-render( <AppContainer><Provider store={store}><App/></Provider></AppContainer>, document.querySelector("#app"));
+render(
+  getTemplate(), document.querySelector("#app")
+);
 
 if (module && module.hot) {
   module.hot.accept('./app', () => {
     render(
-        <AppContainer>
-          <Provider store={store}>
-            <App/>
-          </Provider>
-        </AppContainer>,
-      document.querySelector("#app")
+      getTemplate()
     );
   });
+}
+
+function getTemplate() {
+  return (
+    <AppContainer>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/detail/:videoId" component={Detail} />
+            <Redirect from="/*" exact to="/" />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    </AppContainer>
+  )
 }

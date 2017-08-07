@@ -38,7 +38,7 @@
     opacity: 0;
     transition: all 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
-    // quando l'elemento image si trova denro card--big
+    // quando l'elemento image si trova dentro card--big
     #{$card-root}--big &{
       border-radius: 1px 1px 0 0;
       left: 0;

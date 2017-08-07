@@ -1,6 +1,6 @@
 var React = require('react');
 import {connect} from 'react-redux';
-import {SearchAction} from '../actions/actions';
+import {SearchAction} from '../actions/searchAction';
 import '../style/searchBar.scss';
 import '../style/list.scss';
 
