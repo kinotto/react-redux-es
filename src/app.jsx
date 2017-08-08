@@ -1,7 +1,7 @@
 var React = require('react');
 import SearchBar from './components/searchBar';
 import List from './components/List';
-
+import Header from './components/Header';
 
 export default class App extends React.Component {
   constructor(props){

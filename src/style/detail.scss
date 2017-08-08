@@ -15,7 +15,17 @@
   }
   .img{
     max-width: calc(100% - 40px);
+    max-height: 480px;
     margin: 20px;
   }
-
+  .buyBtn{
+    color: blue;
+    font-family: roboto;
+    font-size: 20px;
+    border-radius: 50%;
+    background: lightblue;
+    padding: 10px;
+    cursor: pointer;
+  }
+  button.buyBtn:focus { outline: none; }
 }

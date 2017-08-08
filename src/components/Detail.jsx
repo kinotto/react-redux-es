@@ -1,6 +1,7 @@
 var React = require('react');
 import { connect } from 'react-redux';
 import { DetailAction } from '../actions/detailAction';
+import { AddToCartAction } from '../actions/cartAction';
 import $ from 'jquery';
 import '../style/detail.scss';
 
@@ -16,16 +17,13 @@ class Detail extends React.Component {
 
         <div className="detail container">
           <div className="text">
-
             <h2>{this.props.media.name}</h2>
-
             <p>{ $(this.props.media.summary).text() }</p>
-
             <h3> Type </h3>
             <p>{this.props.media.type}</p>
-
             <h3> Language </h3>
             <p>{this.props.media.language}</p>
+            <button className="buyBtn" onClick={(e) => this.props.addToCart(this.props.media)}> Buy it!</button>
           </div>
           <div className="text">
             <img src={this.props.media.image && this.props.media.image.original} alt="no img"
@@ -33,7 +31,7 @@ class Detail extends React.Component {
           </div>
         </div>
       )
-      : (<div>{ this.props.dispatch() }</div>)
+      : (<div>{ this.props.goToDetail() }</div>)
   }
 }
 
@@ -45,7 +43,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatch: () => dispatch(DetailAction())
+    goToDetail: () => dispatch(DetailAction()),
+    addToCart: (media) => dispatch(AddToCartAction(media))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Detail);

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/alicoding/react-webpack-babel#readme",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "node-sass": "^4.3.0",
     "react": "15.6.1",

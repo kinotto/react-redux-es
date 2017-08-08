@@ -1,0 +1,32 @@
+.cart{
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    //è sia un figlio flex che un padre flex
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 100%;
+    padding: 10px;
+    box-shadow: 1px 1px 0px #999,
+                2px 2px 0px #999,
+                3px 3px 0px #999,
+                4px 4px 0px #999,
+                5px 5px 0px #999,
+                6px 6px 0px #999;
+
+
+    &--name {
+      font-family: roboto;
+      font-size: 20px;
+    }
+    &--img {
+      max-width: 50px;
+    }
+    &--type{
+      font-family: roboto;
+      font-size: 14px;
+    }
+  }
+}
