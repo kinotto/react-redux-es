@@ -28,7 +28,7 @@ class Detail extends React.Component {
             <p>{this.props.media.language}</p>
           </div>
           <div className="text">
-            <img src={this.props.media.image.original} alt="no img"
+            <img src={this.props.media.image && this.props.media.image.original} alt="no img"
               className="img"/>
           </div>
         </div>
