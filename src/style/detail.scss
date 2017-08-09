@@ -9,23 +9,35 @@
     align-items: center;
   }
 
-  .text {
-    flex-basis: 50%;
+  .child {
+    flex-basis: 100%;
+    @media screen and (min-width: 700px){
+      flex-basis: 50%;
+    }
+
     font-family: Comic Sans;
+
+    .img{
+      max-width: calc(100% - 40px);
+      max-height: 480px;
+      margin: 20px;
+    }
+    .buyBtn{
+      color: blue;
+      font-family: roboto;
+      font-size: 20px;
+      border-radius: 50%;
+      background: lightblue;
+      padding: 10px;
+      transition: .2s;
+      transition-timing-function: ease-in-out;
+      cursor: pointer;
+    }
+    .buyBtn:hover{
+      transform: scale(1.1);
+    }
+    button.buyBtn:focus { outline: none; }
+
   }
-  .img{
-    max-width: calc(100% - 40px);
-    max-height: 480px;
-    margin: 20px;
-  }
-  .buyBtn{
-    color: blue;
-    font-family: roboto;
-    font-size: 20px;
-    border-radius: 50%;
-    background: lightblue;
-    padding: 10px;
-    cursor: pointer;
-  }
-  button.buyBtn:focus { outline: none; }
+
 }

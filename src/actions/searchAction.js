@@ -1,8 +1,9 @@
 import $ from 'jquery';
 
+export const FETCH_MEDIA = 'FETCH_MEDIA';
 function _SearchAction(data){
   return {
-    type: 'FETCH_MOVIES',
+    type: FETCH_MEDIA,
     payload: data
   }
 }

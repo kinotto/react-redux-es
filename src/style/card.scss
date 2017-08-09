@@ -124,6 +124,11 @@
   }
 
   &__action-bar {
+    /*aggiunto in flex per allineare bottoni figli*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     user-select: none;
     position: absolute;
     bottom: 0;
@@ -132,7 +137,7 @@
     right: 0;
     padding: 0 8px;
     border-top: 1px solid #E0E0E0;
-    boz-sizing: border-box;
+    box-sizing: border-box;
     height: 52px;
     transition: left 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
 

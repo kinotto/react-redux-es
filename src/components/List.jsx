@@ -8,7 +8,7 @@ import { DetailAction } from '../actions/detailAction';
 class List extends React.Component {
 
   getListItems(history){
-    return this.props.movies.map( (media) => {
+    return this.props.media.map( (media) => {
       return (
         <ListItem onClick={(e) => {history.push(`/detail/${media.show.id}`); this.props.dispatch(media.show.id)} }
           key={media.show.id}
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => {
 }
 const mapStateToProps = state => {
   return {
-    movies: state.Movies
+    media: state.Media
   }
 }
 

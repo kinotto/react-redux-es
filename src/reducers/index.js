@@ -1,11 +1,11 @@
 import  { combineReducers, createStore } from 'redux';
 import Detail from './detail';
-import Movies from './movies';
+import Media from './media';
 import Cart from './cart';
 
 const rootReducer = combineReducers({
   Detail,
-  Movies,
+  Media,
   Cart
 })
 

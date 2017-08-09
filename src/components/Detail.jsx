@@ -16,7 +16,7 @@ class Detail extends React.Component {
       (
 
         <div className="detail container">
-          <div className="text">
+          <div className="child">
             <h2>{this.props.media.name}</h2>
             <p>{ $(this.props.media.summary).text() }</p>
             <h3> Type </h3>
@@ -25,7 +25,7 @@ class Detail extends React.Component {
             <p>{this.props.media.language}</p>
             <button className="buyBtn" onClick={(e) => this.props.addToCart(this.props.media)}> Buy it!</button>
           </div>
-          <div className="text">
+          <div className="child">
             <img src={this.props.media.image && this.props.media.image.original} alt="no img"
               className="img"/>
           </div>

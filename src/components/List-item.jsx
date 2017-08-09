@@ -1,8 +1,10 @@
 var React = require('react');
 import '../style/card.scss';
 import $ from 'jquery';
+import { connect } from 'react-redux';
+import { AddToCartAction } from '../actions/cartAction';
 
-export default class ListItem extends React.Component {
+class ListItem extends React.Component {
 
   constructor(props){
     super(props);
@@ -15,10 +17,21 @@ export default class ListItem extends React.Component {
         <span className="card__subtitle">by ka</span>
         <p className="card__text">{$(this.props.media.show.summary).text().substring(0, 60)} ...</p>
         <div className="card__action-bar">
-          <button className="card__button">DETAIL</button>
+          <button className="card__button"
+            onClick={(e) => {this.props.addToCart(this.props.media); e.stopPropagation();} }>
+            <i className="fa fa-shopping-cart fa-2x" aria-hidden="true" style={{color: 'red'}}></i>
+          </button>
+          <button className="card__button" onClick={ this.props.onClick }>DETAIL</button>
         </div>
       </div>
     )
   }
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: media => dispatch(AddToCartAction(media))
+  }
+}
+export default connect(null, mapDispatchToProps)(ListItem);
