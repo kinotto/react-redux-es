@@ -1,12 +1,8 @@
-import  { combineReducers, createStore } from 'redux';
-import Detail from './detail';
-import Media from './media';
-import Cart from './cart';
+import ChatReducer from './Chat-reducer';
+import { combineReducers } from 'redux';
 
-const rootReducer = combineReducers({
-  Detail,
-  Media,
-  Cart
+const RootReducer = combineReducers({
+  Chat: ChatReducer
 })
 
-export default rootReducer;
+export default RootReducer;

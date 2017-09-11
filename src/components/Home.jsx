@@ -1,22 +1,43 @@
 var React = require('react');
-import SearchBar from './searchBar';
-import List from './List';
+import '../style/home.scss';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { SetUser } from '../actions/user-actions';
 
-const Home = () => {
-  return (
-    <div>
-      <div className="row">
-        <div className="col-xs-12">
-          <SearchBar />
+class Home extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      userName: ''
+    }
+  }
+  goToChat(history){
+      history.push('/chat');
+      this.props.setUser(this.state.userName)
+  }
+  render(){
+    return (
+      <Route render={ ({history}) =>
+        <div className="home">
+            <h1>Enter chat room </h1>
+            <input type="text" className="form-control home__username" value={this.state.userName}
+              onChange ={ e => this.setState({userName: e.target.value})}
+              style={{width: '30%'}} onKeyDown={ e => e.keyCode == 13 && this.state.userName
+                && this.goToChat(history)} />
+            <button className="btn btn-primary" onClick={e => this.goToChat(history)}
+              disabled={!this.state.userName}> join </button>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-xs-12">
-          <List />
-        </div>
-      </div>
-    </div>
-  )
+      }>
+      </Route>
+    )
+  }
+
 }
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (userName) => dispatch(new SetUser(userName))
+  }
+}
+export default connect(null, mapDispatchToProps)(Home);

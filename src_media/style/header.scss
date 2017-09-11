@@ -1,5 +1,5 @@
 .headerContainer{
-  background-color: lightslategrey;
+  background-color: rgba(0,0,0, .6);;
   position: fixed;
   z-index: 22;
   top:0;
@@ -14,25 +14,18 @@
     align-items: center;
     justify-content: space-between;
 
-    &__element{
+    &__element {
       cursor: pointer;
       font-family: Roboto;
-      font-size: 18px;
+      font-size: 17px;
       z-index: 99;
 
-      &.cart{
-        position: relative;
-        margin-right: 20px;
-        display: block;
-        color: lightyellow;
-      }
       &.cartNr {
         position: absolute;
         top: 0;
-        right: 0;
-        color: orangered;
+        right: 35px;
+        color: white;
         border-radius: 10%;
-        margin-right: -15px;
         color: lightyellow;
       }
       &.label{

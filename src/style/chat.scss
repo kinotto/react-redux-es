@@ -1,0 +1,16 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+
+  &__messages{
+
+  }
+  &__newMessage{
+    /*position: absolute;
+    bottom: 0;
+    left: 0;*/
+    &--area {
+      width: 100%;
+    }
+  }
+}

@@ -15,13 +15,12 @@ class SearchBar extends React.Component{
     if(e.charCode == 13){
       let query = e.target.value;
       this.props.onSearch(val.query);
-      //this.search(query);
     }
   }
   render(){
     return (
-        <div className="parentSearch"><input className="form-control searchBar" onKeyPress={ (e) =>
-          e.charCode == 13 && this.handleInput(e, {query: e.target.value})}/></div>
+        <input className="searchBar" onKeyPress={ (e) =>
+          e.charCode == 13 && this.handleInput(e, {query: e.target.value})}/>
     )
   }
 
