@@ -1,7 +1,7 @@
 import { ADD_MESSAGE } from '../actions/message-actions';
 import { SET_USER } from '../actions/user-actions';
 
-export default function ChatReducer (state = {messages: [{userName: 'pippo', msg: 'ciao'}]}, action){
+export default function ChatReducer (state = {messages: []}, action){
   switch(action.type) {
     case ADD_MESSAGE: {
       /*let messages = state.messages.slice();

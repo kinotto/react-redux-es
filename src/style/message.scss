@@ -1,26 +1,58 @@
 .message{
+  position: relative;
   display: flex;
-  align-items: center;
-  //justify-content: space-between;
+  flex-direction: column;
+  //mobile first
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  @media screen and (min-width: 800px){
+    margin-left: initial;
+    margin-right: initial;
+    width: 60%;
+  }
 
+  margin-bottom: 10px;
+  //justify-content: space-between;
   padding: 30px;
 
-
+  border-radius: 20px;
 
   &__username{
     display: inline-block;
-    width: 10%;
-
+    color: rgba(0,0,255, .6);
+    font-size: 17px;
   }
 
   &__content{
     display: inline-block;
-    width: 80%;
+
   }
 
+  transition: all .2s ease;
 }
 
-.message.message__grey {
-    border: 1px solid rgba(0,0,0, .2);
-    background: rgba(0,0,0,.2);
+.message.message__background--left {
+    border: 1px solid rgba(0,0,0, .1);
+    background: rgba(0,0,0,.1);
+    border-bottom-left-radius: 0px;
 }
+.message.message__background--right {
+    border: 1px solid rgba(0,0,0, .1);
+    background: rgba(0,0,0,.1);
+    @media screen and (min-width: 800px){
+      left: 40%;
+    }
+    border-bottom-right-radius: 0px;
+}
+
+/*.message:before{
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  top: 80px;
+  border: 5px solid;
+  border-color: #666 transparent transparent #666;
+}*/

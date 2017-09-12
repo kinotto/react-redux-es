@@ -2,15 +2,38 @@
   display: flex;
   flex-direction: column;
 
-  &__messages{
-
-  }
   &__newMessage{
     /*position: absolute;
     bottom: 0;
     left: 0;*/
-    &--area {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    @media screen and (min-width: 800px){
+      margin-left: initial;
+      margin-right: initial;
       width: 100%;
+    }
+
+
+    &__area {
+      height: 200px !important;
+      box-shadow: 1px 1px 0px #999,
+                2px 2px 0px #999,
+                3px 3px 0px #999,
+                4px 4px 0px #999,
+                5px 5px 0px #999,
+                6px 6px 0px #999 !important;
+
+    }
+    .chat__newMessage__area.chat__newMessage__area--empty{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 500px !important;
+      height: 200px !important;
+      transform: translate(-50%, -50%);
+      font-size: 18px !important;
     }
   }
 }

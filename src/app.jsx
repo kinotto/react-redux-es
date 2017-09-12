@@ -3,8 +3,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import RootReducer from './reducers/index';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Home from './components/home';
-import Chat from './components/chat';
+import Home from './components/Home';
+import Chat from './components/Chat';
 
 
 export default class App extends React.Component {
