@@ -1,7 +1,6 @@
 var React = require('react');
-var io = require('socket.io-client');
 import { connect } from 'react-redux';
-import { AddMessage } from '../actions/message-actions';
+import { AddMessageRequest, TypingOutRequest } from '../actions/message-actions';
 import Message  from './Message';
 import { CHAT_ENDPOINT } from '../API';
 import '../style/chat.scss';
@@ -10,39 +9,25 @@ class Chat extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {typingData: false};
-    this.socket = io.connect(CHAT_ENDPOINT);
-    this.socket.on('msg to room', (data) => {
-      this.props.addMessage(data.userName, data.msg);
-    })
-
-    this.typingTO;
-    this.socket.on('typing to room', (data) => {
-      this.setState({typingData: data});
-      if(this.typingTO)
-        clearTimeout(this.typingTO);
-      this.typingTO = setTimeout(() => {this.setState({typingData: false});}, 1000);
-    })
-
+    this.state = { isTyping: false };
   }
 
   addMessage(e){
     if(e.keyCode == 13)
       e.preventDefault();
-  
+
     if(e.keyCode == 13 && e.target.value !== ''){
-      e.preventDefault();
-      this.socket.emit('msg to room', {
+      this.props.addMessage({
         img: '',
         userName: this.props.userName,
         msg: e.target.value,
         socketTo: null
-      });
+      })
       e.target.value = '';
-      this.setState({typingData: false});
     }
-
-    this.socket.emit('typing to room', {userName: this.props.userName});
+    else
+      this.props.typingOut({userName: this.props.userName});
+    //this.socket.emit('typing to room', {userName: this.props.userName});
   }
 
   getMessages(){
@@ -50,14 +35,22 @@ class Chat extends React.Component {
       return ( <Message message={msg} index={index} key={index}></Message> )
     })
   }
-  render(){
+  componentWillReceiveProps(){
+    if(this.props.typingData){
+      this.setState({isTyping: true});
+      setTimeout(() => { this.setState({isTyping: false}) }, 1000);
+    }
+    else
+      this.setState({isTyping: false});
+  }
 
+  render(){
     return (
       <div className="chat">
         {!this.props.userName ? location.href = '/' : ''}
         {this.getMessages()}
-        {this.state.typingData ?
-          <Message message={{userName: '', content: `${this.state.typingData.userName} sta scrivendo..`}}>
+        {this.state.isTyping ?
+          <Message message={{userName: '', content: `${this.props.typingData.userName} sta scrivendo..`}}>
           </Message>
           : ''}
 
@@ -67,20 +60,19 @@ class Chat extends React.Component {
             : 'chat__newMessage__area chat__newMessage__area--empty form-control '}
             onKeyDown={ this.addMessage.bind(this) }/>
         </div>
+
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    messages: state.Chat.messages,
-    userName: state.Chat.userName
-  }
+const mapStateToProps = ({Chat}) => {
+  return Chat;
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMessage: (userName, msg) => dispatch(new AddMessage({userName: userName, content: msg}))
+    addMessage: (data) => dispatch(new AddMessageRequest(data)),
+    typingOut: (data) => dispatch(new TypingOutRequest(data))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

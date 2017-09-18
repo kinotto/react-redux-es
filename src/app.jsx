@@ -1,16 +1,26 @@
 var React = require('react');
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './saga/saga';
 import { Provider } from 'react-redux';
 import RootReducer from './reducers/index';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import Chat from './components/Chat';
+import { INIT_SOCKET_ASYNC } from './saga/saga';
 
+const sagaMiddleware = createSagaMiddleware()
+export const store = createStore(
+  RootReducer,
+  applyMiddleware(sagaMiddleware)
+)
+
+sagaMiddleware.run(rootSaga);
+//store.dispatch(INIT_SOCKET_ASYNC);
 
 export default class App extends React.Component {
 
   render() {
-    const store = createStore(RootReducer);
 
     return (
         <Provider store={store}>
