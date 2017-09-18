@@ -10,7 +10,7 @@ import Chat from './components/Chat';
 import { INIT_SOCKET_ASYNC } from './saga/saga';
 
 const sagaMiddleware = createSagaMiddleware()
-export const store = createStore(
+const store = createStore(
   RootReducer,
   applyMiddleware(sagaMiddleware)
 )

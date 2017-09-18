@@ -23,7 +23,7 @@ class Home extends React.Component {
             <h1>Enter chat room </h1>
             <input type="text" className="form-control home__username" value={this.state.userName}
               onChange ={ e => this.setState({userName: e.target.value})}
-              style={{width: '30%'}} onKeyDown={ e => e.keyCode == 13 && this.state.userName
+              onKeyDown={ e => e.keyCode == 13 && this.state.userName
                 && this.goToChat(history)} />
             <button className="btn btn-primary" onClick={e => this.goToChat(history)}
               disabled={!this.state.userName}> join </button>

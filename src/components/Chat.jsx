@@ -4,6 +4,7 @@ import { AddMessageRequest, TypingOutRequest } from '../actions/message-actions'
 import Message  from './Message';
 import { CHAT_ENDPOINT } from '../API';
 import '../style/chat.scss';
+import $ from 'jquery';
 
 class Chat extends React.Component {
 
@@ -12,6 +13,16 @@ class Chat extends React.Component {
     this.state = { isTyping: false };
   }
 
+  getMessageClass(prevMessageIdx, userName){
+    let prevDOM = $('.message')[prevMessageIdx];
+    if(prevMessageIdx === false || isNaN(prevMessageIdx) || prevMessageIdx < 0)
+      return 'left';
+    if(this.props.messages[prevMessageIdx].userName === userName){
+      return $(prevDOM).attr('class').indexOf('left') !== -1 ? 'left' : 'right';
+    } else{
+      return $(prevDOM).attr('class').indexOf('left') !== -1 ? 'right' : 'left';
+    }
+  }
   addMessage(e){
     if(e.keyCode == 13)
       e.preventDefault();
@@ -27,18 +38,21 @@ class Chat extends React.Component {
     }
     else
       this.props.typingOut({userName: this.props.userName});
-    //this.socket.emit('typing to room', {userName: this.props.userName});
   }
 
   getMessages(){
     return this.props.messages.map( (msg, index) => {
-      return ( <Message message={msg} index={index} key={index}></Message> )
+      return ( <Message message={msg} _class={ this.getMessageClass(index - 1, msg.userName) }
+                index={index} key={index}></Message> )
     })
   }
+
+
   componentWillReceiveProps(){
     if(this.props.typingData){
+      this.timeout && clearTimeout(this.timeout);
       this.setState({isTyping: true});
-      setTimeout(() => { this.setState({isTyping: false}) }, 1000);
+      this.timeout = setTimeout(() => { this.setState({isTyping: false}) }, 1000);
     }
     else
       this.setState({isTyping: false});
@@ -50,7 +64,9 @@ class Chat extends React.Component {
         {!this.props.userName ? location.href = '/' : ''}
         {this.getMessages()}
         {this.state.isTyping ?
-          <Message message={{userName: '', content: `${this.props.typingData.userName} sta scrivendo..`}}>
+          <Message message={{userName: '', content: `${this.props.typingData.userName} sta scrivendo..`}}
+          _class={this.getMessageClass(this.props.messages.length  == 1 ? 0 : this.props.messages.length - 2,
+             this.props.typingData.userName)}>
           </Message>
           : ''}
 
