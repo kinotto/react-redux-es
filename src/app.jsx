@@ -7,7 +7,7 @@ import RootReducer from './reducers/index';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import Chat from './components/Chat';
-import { INIT_SOCKET_ASYNC } from './saga/saga';
+import { initApp } from '.actions/message-actions';
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
@@ -16,6 +16,7 @@ const store = createStore(
 )
 
 sagaMiddleware.run(rootSaga);
+store.dispatch(new initApp(localStorage.getItem('user')));
 //store.dispatch(INIT_SOCKET_ASYNC);
 
 export default class App extends React.Component {

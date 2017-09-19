@@ -61,5 +61,10 @@ module.exports = {
         js: [ "bundle.js"],
       }
     }),
+    new webpack.ProvidePlugin({   
+        jQuery: 'jquery',
+        $: 'jquery',
+        jquery: 'jquery'
+    })
   ]
 };

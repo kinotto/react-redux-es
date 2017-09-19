@@ -4,7 +4,8 @@ import { AddMessageRequest, TypingOutRequest } from '../actions/message-actions'
 import Message  from './Message';
 import { CHAT_ENDPOINT } from '../API';
 import '../style/chat.scss';
-import $ from 'jquery';
+import Header from './Header';
+
 
 class Chat extends React.Component {
 
@@ -61,7 +62,8 @@ class Chat extends React.Component {
   render(){
     return (
       <div className="chat">
-        {!this.props.userName ? location.href = '/' : ''}
+        <Header logOut={ () => { this.props.history.goBack(); localStorage.removeItem('user'); }}/>
+        {!this.props.userName ? this.props.history.push('/') : ''}
         {this.getMessages()}
         {this.state.isTyping ?
           <Message message={{userName: '', content: `${this.props.typingData.userName} sta scrivendo..`}}

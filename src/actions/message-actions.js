@@ -2,7 +2,7 @@ export const ADD_MESSAGE = "add message";
 export const TYPING_OUT_REQUEST = "typing out request";
 export const ADD_MESSAGE_REQUEST = "add message request";
 export const TYPING_IN = "typing in";
-
+export const INIT_APP = "init app";
 
 //intercettate da redux-saga
 export function AddMessageRequest(payload){
@@ -30,6 +30,13 @@ export function TypingIn(payload){
 export function AddMessage(payload){
   return {
     type: ADD_MESSAGE,
+    payload: payload
+  }
+}
+
+export function initApp(payload){
+  return {
+    type: INIT_APP,
     payload: payload
   }
 }
