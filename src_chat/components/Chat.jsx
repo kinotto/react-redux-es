@@ -18,7 +18,7 @@ class Chat extends React.Component {
     let prevDOM = $('.message')[prevMessageIdx];
     if(prevMessageIdx === false || isNaN(prevMessageIdx) || prevMessageIdx < 0)
       return 'left';
-    if(this.props.messages[prevMessageIdx].userName === userName){
+    if(this.props.messages.get(prevMessageIdx).userName === userName){
       return $(prevDOM).attr('class').indexOf('left') !== -1 ? 'left' : 'right';
     } else{
       return $(prevDOM).attr('class').indexOf('left') !== -1 ? 'right' : 'left';
@@ -48,7 +48,9 @@ class Chat extends React.Component {
     })
   }
 
-
+  componentDidMount(){
+    !this.props.userName && this.props.history.push('/');
+  }
   componentWillReceiveProps(){
     if(this.props.typingData){
       this.timeout && clearTimeout(this.timeout);
@@ -63,17 +65,16 @@ class Chat extends React.Component {
     return (
       <div className="chat">
         <Header logOut={ () => { this.props.history.goBack(); localStorage.removeItem('user'); }}/>
-        {!this.props.userName ? this.props.history.push('/') : ''}
         {this.getMessages()}
         {this.state.isTyping ?
           <Message message={{userName: '', content: `${this.props.typingData.userName} sta scrivendo..`}}
-          _class={this.getMessageClass(this.props.messages.length  == 1 ? 0 : this.props.messages.length - 2,
+          _class={this.getMessageClass(this.props.messages.size  == 1 ? 0 : this.props.messages.size - 2,
              this.props.typingData.userName)}>
           </Message>
           : ''}
 
         <div className="chat__newMessage">
-          <textarea placeholder="Message here" className={this.props.messages.length
+          <textarea placeholder="Message here" className={this.props.messages.size
             ? 'chat__newMessage__area form-control '
             : 'chat__newMessage__area chat__newMessage__area--empty form-control '}
             onKeyDown={ this.addMessage.bind(this) }/>
@@ -84,8 +85,16 @@ class Chat extends React.Component {
   }
 }
 
-const mapStateToProps = ({Chat}) => {
-  return Chat;
+const mapStateToProps = (state) => {
+  let immutableChat = state.get('Chat');
+  let p = {
+    messages: immutableChat.get('messages'),
+    typingData: immutableChat.get('typingData'),
+    userName: immutableChat.get('userName')
+  }
+  //return immutableChat.toJS();
+  return p;
+  //return {messages: [], typingData: false};
 }
 const mapDispatchToProps = (dispatch) => {
   return {

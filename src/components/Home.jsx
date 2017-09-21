@@ -1,43 +1,27 @@
 var React = require('react');
-import '../style/home.scss';
-import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { SetUser } from '../actions/user-actions';
+import '../style/home.scss';
 
 class Home extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      userName: ''
-    }
-  }
-  goToChat(history){
-      history.push('/chat');
-      this.props.setUser(this.state.userName)
-  }
   render(){
     return (
-      <Route render={ ({history}) =>
-        <div className="home">
-            <h1>Enter chat room </h1>
-            <input type="text" className="form-control home__username" value={this.state.userName}
-              onChange ={ e => this.setState({userName: e.target.value})}
-              onKeyDown={ e => e.keyCode == 13 && this.state.userName
-                && this.goToChat(history)} />
-            <button className="btn btn-primary" onClick={e => this.goToChat(history)}
-              disabled={!this.state.userName}> join </button>
-        </div>
-      }>
-      </Route>
+      <ul className="list-group">
+        {
+          this.props.beers.map( beer =>
+              <li key={beer.id} className="list-group-item">
+                <img src={beer.image_url} className="home__img" />
+                <span className="home__description">{ beer.description } </span>
+              </li>
+            )
+        }
+      </ul>
     )
   }
-
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    setUser: (userName) => dispatch(new SetUser(userName))
+    beers: state.get('beerReducer').get('beers')
   }
 }
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

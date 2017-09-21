@@ -17,7 +17,7 @@ function connect(){
   return Promise.resolve(socket);
 }
 
-function* subscribe(socket){
+function subscribe(socket){
   return eventChannel(emit => {
     socket.on('msg to room', (data) => {
       //emit emette eventi sul CANALE!! non allo store
