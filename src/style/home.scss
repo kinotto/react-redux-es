@@ -1,12 +1,17 @@
-.home {
-  &__img {
-    display: inline-block;
-    max-width: 50px;
-    padding: 10px;
-  }
+.home{
+  font-family: Roboto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  &__description {
-    display: inline-block;
-    width: 95%;
+  & input {
+    width: 30% !important;
+  }
+  & button {
+
+  }
+  &__username {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }

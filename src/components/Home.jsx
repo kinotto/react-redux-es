@@ -1,27 +1,51 @@
 var React = require('react');
-import { connect } from 'react-redux';
 import '../style/home.scss';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { SetUser } from '../actions/user-actions';
 
 class Home extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      userName: ''
+    }
+  }
+  componentDidMount(){
+    let user = localStorage.getItem('user');
+    if(user){
+      this.props.history.push('/chat');
+      //this.props.setUser(user);
+    }
+  }
+  goToChat(history){
+    this.props.setUser(this.state.userName);
+    history.push('/chat');
+
+  }
   render(){
     return (
-      <ul className="list-group">
-        {
-          this.props.beers.map( beer =>
-              <li key={beer.id} className="list-group-item">
-                <img src={beer.image_url} className="home__img" />
-                <span className="home__description">{ beer.description } </span>
-              </li>
-            )
-        }
-      </ul>
+      <Route render={ ({history}) =>
+        <div className="home">
+            <h1>Enter chat room </h1>
+            <input type="text" className="form-control home__username" value={this.state.userName}
+              onChange ={ e => this.setState({userName: e.target.value})}
+              onKeyDown={ e => e.keyCode == 13 && this.state.userName
+                && this.goToChat(history)} />
+            <button className="btn btn-primary" onClick={e => this.goToChat(history)}
+              disabled={!this.state.userName}> join </button>
+        </div>
+      }>
+      </Route>
     )
   }
+
 }
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    beers: state.get('beerReducer').get('beers')
+    setUser: (userName) => { localStorage.setItem('user', userName); dispatch(new SetUser(userName)) }
   }
 }
-export default connect(mapStateToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);
