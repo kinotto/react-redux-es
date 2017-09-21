@@ -1,32 +1,17 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
-import App from './app.jsx';
-import 'jquery/dist/jquery.min.js';
-import 'bootstrap/dist/js/bootstrap.js';
+var React = require('react');
+var ReactDOM = require('react-dom');
 import 'bootstrap/dist/css/bootstrap.css';
+import App from './app';
 
 /*
- applicazione CHAT
- librerie:
- react, redux, redux-saga, immutableJS
+ esercizio di chiamata a endpoint che restituisce una lista di birre da renderizzare
+ stack:
+ react, redux, redux-observable, immutableJS
 */
 
 const getTemplate = () => {
   return (
-    <AppContainer>
-        <App/>
-    </AppContainer>
+    <App/>
   )
 }
-
-render(getTemplate() , document.querySelector("#app"));
-
-if (module && module.hot) {
-  module.hot.accept('./app', () => {
-    render(
-      getTemplate(),
-      document.querySelector("#app")
-    );
-  });
-}
+ReactDOM.render(getTemplate(), document.querySelector('#myApp'));
