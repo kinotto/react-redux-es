@@ -7,6 +7,7 @@ import * as actions from '../actions';
 const api = 'https://api.punkapi.com/v2/beers';
 
 const fetchBeersAsync = (action$, store) => {
+  console.log(action$);
   return action$
     .ofType(actions.FETCH_BEERS)
     .switchMap( action => {

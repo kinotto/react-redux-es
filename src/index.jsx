@@ -6,7 +6,7 @@ import App from './app';
 /*
  esercizio di chiamata a endpoint che restituisce una lista di birre da renderizzare
  stack:
- react, redux, redux-observable, immutableJS
+ react, redux, redux-observable, immutableJS, reselect
 */
 
 const getTemplate = () => {

@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/home';
 import { fetchBeers } from './actions';
 import { rootEpic } from './epic';
+
 const epicMiddleware = createEpicMiddleware(rootEpic);
 const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
 

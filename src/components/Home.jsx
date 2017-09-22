@@ -1,5 +1,6 @@
 var React = require('react');
 import { connect } from 'react-redux';
+import { getBeers } from '../reducers';
 import '../style/home.scss';
 
 class Home extends React.Component {
@@ -21,7 +22,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    beers: state.get('beerReducer').get('beers')
+    beers: getBeers(state)
   }
 }
 export default connect(mapStateToProps)(Home);
